@@ -1,12 +1,19 @@
 import { Module } from '@nestjs/common';
-import { TeacherController } from '../controllers/TeacherController';
-import { TeacherService } from 'src/services/TeacherService';
-
-
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TeacherModule } from './TeacherModule';
 
 @Module({
-  imports: [],
-  controllers: [TeacherController],
-  providers: [TeacherService],
+  imports: [TypeOrmModule.forRoot({
+    type: 'mysql',
+    host: 'localhost',
+    port: 3306,
+    username: 'root',
+    password: '',
+    database: 'imc',
+    logging: true,
+    autoLoadEntities: true
+  }), TeacherModule],
+  controllers: [],
+  providers: [],
 })
 export class AppModule { }
