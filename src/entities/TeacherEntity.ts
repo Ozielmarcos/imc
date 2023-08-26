@@ -20,4 +20,10 @@ export class TeacherEntity {
     if (email) this.email = email
     if (password) this.password = password
   }
+
+  set(name?: string, email?: string, password?: string) {
+    if (name) this.name = name
+    if (email) this.email = email
+    if (password) this.password = password
+  }
 }
