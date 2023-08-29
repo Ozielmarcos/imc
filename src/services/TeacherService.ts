@@ -32,7 +32,12 @@ export class TeacherService {
     await teacherEntity.set(teacher.name, teacher.email, teacher.password ? this.hashPassword(teacher.password) : undefined)
     const updatedTeacher = await this.teacherRepository.save(teacherEntity)
     return new TeacherEntity(id, updatedTeacher.name, updatedTeacher.email)
+  }
 
+  async remove(id: number) {
+    const teacher = await this.teacherRepository.findOne({ where: { id: id } })
+    if (!teacher) throw new NotFoundException('Professor não encontrado')
+    await this.teacherRepository.remove(teacher)
   }
 
   private hashPassword(password: string) {

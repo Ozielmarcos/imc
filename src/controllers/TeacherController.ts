@@ -35,7 +35,9 @@ export class TeacherController {
 
   @UseGuards(AuthGuard)
   @Get(':id')
-  findOne() { }
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.teacherService.findOne(id)
+  }
 
   @UseGuards(AuthGuard)
   @Put(':id')
@@ -46,7 +48,10 @@ export class TeacherController {
   }
 
   @UseGuards(AuthGuard)
-  @Delete()
-  remove() { }
+  @Delete(':id')
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    await this.teacherService.remove(id)
+    return 'Deletado com sucesso!'
+  }
 
 }
